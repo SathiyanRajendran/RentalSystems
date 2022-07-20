@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - RentalSystems</title>
+    <link rel="stylesheet" href="~/css/StyleSheet.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://kit.fontawesome.com/4c958e4f95.js" crossorigin="anonymous"></script>
+  
+<style>
+    a:hover {
+  background-color:lightgreen;
+}
+</style>
+
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3">
+            <div class="container">
+                <img src="~/css/logo.jpg" alt="logo" width="100px" height="90px"/>
+                <a class="navbar-brand" style="font-display:block;font-size:x-large" asp-area="" asp-controller="Home" asp-action="Index">Capetown Rentals System</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-decoration-underline" style="font-size:x-large" asp-area="" asp-controller="Home" asp-action="Search" >Products</a><i class="fa-solid fa-house-blank"></i>
+
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-decoration-underline" style="font-size:x-large" asp-area="" asp-controller="Home" asp-action="Tariffs">Tariff</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-decoration-underline" style="font-size:x-large" asp-area="" asp-controller="Owners" asp-action="SearchForm">Search</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link text-decoration-underline" style="font-size:x-large" asp-area="" asp-controller="Home" asp-action="Offers">Offers</a>
+                        </li>
+                        <li>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30449.88443781658!2d78.37413606998985!3d17.44843628467815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9158f201b205%3A0x11bbe7be7792411b!2sMadhapur%2C%20Telangana!5e0!3m2!1sen!2sin!4v1657909912547!5m2!1sen!2sin" width="90" height="60" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                        </li>>
+ </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-decoration-underline" style="font-size:x-large" asp-area="" asp-controller="Payments" asp-action="Index">Exciting Plans</a>
+                        </li>
+</ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - RentalSystems - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> 
+            -------------Follow Us
+            <a class="text-light" href="https://instagram.com/" target="_blank" rel="sponsored"><i class="fa-brands fa-instagram fa-2x"></i></a>           
+             <a class="text-light" href="https://fb.com/" target="_blank" rel="sponsored"><i class="fa-brands fa-facebook fa-2x"></i></a>   
+             <a class="text-light" href="https://twitter.com/" target="_blank"><i class="fa-brands fa-twitter-square fa-2x"></i></a>
+              <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i class="fa-brands fa-linkedin fa-2x"></i></a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

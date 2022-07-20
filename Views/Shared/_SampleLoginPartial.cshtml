@@ -1,0 +1,45 @@
+﻿
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+<ul class="navbar-nav">
+    @{
+        ViewBag.AdminName = @HttpContextAccessor.HttpContext.Session.GetString("adminname");
+    }
+    @if (ViewBag.AdminName != null)
+    {
+        <li class="nav-item">
+            <a id="manage" class="nav-link text-dark" asp-controller="Home" asp-action="Privacy" title="Manage">Hello @ViewBag.AdminName!</a>
+        </li>
+        <li class="nav-item">
+            @*<form id="logoutForm" class="form-inline" asp-controller="Login"  asp-action="Logout" asp-route-returnUrl="@Url.Action("Login", "Login", new { area = "" })">*@
+            <form>
+                <button id="Logout" type="submit" class="nav-link btn btn-link text-dark" asp-controller="Login" asp-action="Logout">Logout</button>
+            </form>
+            @*</form>*@
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-decoration-underline" style="font-size:x-large" id="Register" asp-controller="Login" asp-action="Register" >Register</a>
+            @*@Html.ActionLink("Register","Create","Users")*@
+        </li>
+       @* <li class="nav-item">
+            <a class="nav-link text-dark" id="Login" asp-controller="Login" asp-action="Login">Login</a>
+        </li>*@
+         <div class="dropdown">
+  <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:large">
+    Login
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item btn-outline-success" href="Login/Login">UserLogin</a>
+    <a class="dropdown-item btn-outline-success" href="Login/AdminLogin">AdminLogin</a>
+  @*  <a class="dropdown-item" href="#">Something else here</a>*@
+  </div>
+   </div>
+    }
+</ul>

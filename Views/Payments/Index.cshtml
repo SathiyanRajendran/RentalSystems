@@ -1,0 +1,63 @@
+﻿@model RentalSystems.Models.Payment
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor;
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+
+<hr />  
+<head>
+<script src="https://kit.fontawesome.com/4c958e4f95.js" crossorigin="anonymous"></script>
+</head>
+@{
+    ViewBag.ToPay = @HttpContextAccessor.HttpContext.Session.GetInt32("topay");
+}
+@if(ViewBag.ToPay != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Your Applied Offer Is Here</strong>
+
+        <a id="manage" class="nav-link text-dark" asp-controller="Payments" asp-action="Index" title="Manage">Your Offer is @ViewBag.ToPay! Use this Offer</a>
+
+    </div>
+}
+
+<html>
+    <head>
+        <body>
+            <h2>Exciting Plans for your Coupons</h2>
+            <h2><marquee style="background-color:lightgreen">10% Off On Above Rs.2000 Booking</marquee></h2>
+            <h2><marquee style="background-color:coral">5% Off On Above Rs.1200 Booking</marquee></h2>
+            <div class="row">
+                @using(Html.BeginForm("Index","Payments",FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label for="Name">Name</label>
+                    <input type="text" class="form-control" placeholder="Enter your Name" id="Name" name="Name" value="@Model.Name"/>
+               </div>
+               <div class="form-group">
+                    <label for="CouponCode">CouponCode</label>
+                    <input type="text" class="form-control" id="CouponCode" placeholder="Enter Valid Coupon" name="CouponCode" value="@Model.CouponCode"/>
+               </div>
+               <div class="form-group">
+                    <label for="Amount">Amount</label>
+                    <input type="text" class="form-control" id="Amount" placeholder="Enter your Amount" name="Amount" value="@Model.Amount"/>
+               </div>
+               <div class="form-group">
+                    <label for="Offer">Offer</label>
+                    <input type="text" class="form-control" id="Offer" placeholder="Your offer is here" name="Offer" value="@Model.Offer"/>
+               </div>
+                <div class="form-group">
+                    <label for="ToPay">To Pay </label>
+                    <input type="text" class="form-control" id="ToPay" placeholder="To Pay" name="ToPay" value="@Model.ToPay"/>
+               </div>
+               <button type="submit" class="btn-info" id="add" value="add">Submit</button>
+            }
+
+            </div>
+        </body>
+    </head>
+</html>

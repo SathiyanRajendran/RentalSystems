@@ -1,0 +1,71 @@
+﻿@model IEnumerable<RentalSystems.Models.Customer>
+
+@{
+    ViewData["Title"] = "Booking";
+}
+
+<h1>Booking</h1>
+
+<p>
+    <a asp-action="CreateBooking">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+             <th>
+                @Html.DisplayNameFor(model => model.Owner.CompanyName)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.Owner.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Owner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdProof)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+             <td>
+                @Html.DisplayFor(modelItem => item.Owner.CompanyName)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.Owner.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Owner.VehicleId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                <img src="~/css/@item.IdProof" alt="no data" height="100" width="100"/>
+            </td>
+            <td>
+                <a asp-action="EditDetails" asp-route-id="@item.CustomerId">Edit</a> |
+                <a asp-action="CustomerDetails" asp-route-id="@item.CustomerId">Details</a> |
+                <a asp-action="DeleteDetails" asp-route-id="@item.CustomerId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

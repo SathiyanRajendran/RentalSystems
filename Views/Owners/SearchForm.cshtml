@@ -1,0 +1,32 @@
+﻿@model RentalSystems.Models.Owner
+
+@{
+    ViewData["Title"] = "SearchForm";
+}
+<style>class:hover {
+  background-color:burlywood;
+} 
+</style>
+
+<h1>CustomerSearch</h1>
+
+<h4>Bike Model Details</h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SearchResult" >
+            <div class="form-group">
+                <label for="SearchPhrase" class="control-label"></label>
+                <input name="SearchPhrase" placeholder="search" class="form-control" />
+            </div>
+            <br/>
+            <div class="form-group">
+                <input type="submit" style="font-size:medium" value="Search" class="btn btn-block" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+</div>

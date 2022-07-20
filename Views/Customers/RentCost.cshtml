@@ -1,0 +1,51 @@
+﻿@model RentalSystems.Models.RentalPayment
+
+@{
+    ViewData["Title"] = "RentCost";
+}
+<h1>CapeTown Rental Systems Private Limited</h1>
+<h1>Madhapur,Hyderabad-630301</h1>
+<h3>Invoice</h3>
+<html>
+    <head>
+        <body>
+           
+            <div class="row">
+                @using(Html.BeginForm("RentCost","Customers",FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label for="CardNumber">CardNumber</label>
+                    <input type="text" class="form-control" id="CardNumber" name="CardNumber" value="@Model.CardNumber"/>
+               </div>
+              
+               <div class="form-group">
+                    <label for="Charge">Charge</label>
+                    <input type="text" class="form-control" id="Charge" name="Charge" value="@Model.Charge"/>
+               </div>
+               <div class="form-group">
+                    <label for="Offer">GST</label>
+                    <input type="text" class="form-control" id="GST" name="GST" value="@Model.GST"/>
+               </div>
+                <div class="form-group">
+                    <label for="Total">Total</label>
+                    <input type="text" class="form-control" id="Total" name="Total" value="@Model.Total"/>
+               </div>
+               <br>
+               <button type="submit" class="btn-info" id="add" value="add">Pay</button>
+               <br>
+               <div>
+                   <button type="button" onclick='print()'>Invoice</button>
+                   <br>
+                   <a asp-action="Feedback" class="btn-primary">Submit</a>
+           </div>
+           <h1>Thank you</h1>
+           <h1>Visit Again</h1>
+
+            }
+
+            </div>
+        </body>
+    </head>
+</html>
+
+

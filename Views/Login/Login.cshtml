@@ -1,0 +1,57 @@
+﻿@model RentalSystems.Models.Registrationtable
+
+
+@{
+    ViewData["Title"] = "Login";
+}
+@if (ViewBag.Login!= null)
+            {
+                <script type="text/javascript">
+window.onload = function()
+{ alert("@ViewBag.Login");
+};
+</script>
+            }
+
+<h1>Login</h1>
+
+<h4>Registrationtable</h4>
+<hr />
+
+<head>
+    <script>
+    window.alert("Please enter your valid user id and password")
+    </script>
+</head>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <i class="fa-solid fa-person"></i>
+                <input asp-for="UserId" class="form-control" />
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>     
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <i class="fa-solid fa-key"></i>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Register">Sign Up</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,47 @@
+﻿@model RentalSystems.Models.Feedback
+
+@{
+    ViewData["Title"] = "Feedback";
+}
+
+<h1>Feedback</h1>
+
+<h4>Your Order is Successfully Booked it's On the Way</h4>
+<h4>Please Enter the Valid Comments for our Future Services</h4>
+<hr />
+@*<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Feedback">*@
+             <div class="row row d-flex aligns-items-center justify-content-center">
+            <div class="col-md-6 card p-3 px-5 py-5 mt-3 bg-grad" style="background-color:cadetblue">
+            <form asp-action="Feedback" class="row g-6">
+@*            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+*@          <h3 style="text-align:center"> CapeTown Rental System Private Limited </h3>
+            <h4 style="text-align:center">Feedback Form</h4>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmailId" class="control-label"></label>
+                <input asp-for="EmailId" class="form-control" />
+                <span asp-validation-for="EmailId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Suggestions" class="control-label"></label>
+                <input asp-for="Suggestions" class="form-control" />
+                <span asp-validation-for="Suggestions" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="VehicleList">Skip</a>
+</div>
+
