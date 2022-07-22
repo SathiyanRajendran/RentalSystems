@@ -30,6 +30,7 @@ namespace RentalSystems.Controllers
             if (result != null)
             {
                 HttpContext.Session.SetString("username", result.UserName);
+                HttpContext.Session.SetString("emailid", result.EmailId);
 
                 return RedirectToAction("VehicleList", "Customers");
             }

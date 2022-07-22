@@ -57,6 +57,8 @@ namespace RentalSystems.Controllers
         {
             var result = new SelectList(from i in db.owners select i.VehicleId).ToList();
             ViewBag.VehicleId = result;
+            ViewBag.Username = HttpContext.Session.GetString("username");
+            ViewBag.EmailId = HttpContext.Session.GetString("emailid");
             return View();
         }
         [HttpPost]

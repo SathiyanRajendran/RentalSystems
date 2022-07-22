@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RentalSystems.Models;
 
 namespace RentalSystems.Migrations
 {
     [DbContext(typeof(OwnerDbContext))]
-    partial class OwnerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220722093856_migr 7")]
+    partial class migr7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

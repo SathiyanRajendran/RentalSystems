@@ -16,11 +16,23 @@
                 <label asp-for="VehicleId" class="control-label"></label>
                 <select asp-for="VehicleId" class ="form-control" asp-items="ViewBag.VehicleId"></select>
             </div>
+            
+
             <div class="form-group">
                 <label asp-for="CustomerName" class="control-label"></label>
-                <input asp-for="CustomerName" placeholder="Name as per Aadhaar" class="form-control" />
+                <input asp-for="CustomerName" placeholder="Name as per Aadhaar" value="@ViewBag.Username" class="form-control" />
                 <span asp-validation-for="CustomerName" class="text-danger"></span>
             </div>
+             <div class="form-group">
+                <label asp-for="Email_Id" class="control-label"></label> 
+@*                //SET-->LOGINCONTROLLER
+                  //GET-->CUSTOMERSCONTROLLER
+                  //CREATE-->CSHTML
+*@               
+                <input asp-for="Email_Id" placeholder="Valid EmailId" value="@ViewBag.EmailId" class="form-control" />
+                <span asp-validation-for="Email_Id" class="text-danger"></span>
+            </div>
+           
             <div class="form-group">
                 <label asp-for="StartDate" class="control-label"></label>
                 <input asp-for="StartDate" placeholder="Enter the Date and Time" class="form-control" />

@@ -10,6 +10,9 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Authorization;
+using IronBarCode;
+using System.Drawing;
+using System.IO;
 
 namespace RentalSystems.Controllers
 {
@@ -41,7 +44,7 @@ namespace RentalSystems.Controllers
         }
         public IActionResult Search(string option, string search,int? pageNumber)
         {
-          
+           
 
             if (option == "VehicleNo")
             {
@@ -71,6 +74,41 @@ namespace RentalSystems.Controllers
         {
             return View();
         }
-        
+        public IActionResult CreateQRCode()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CreateQRCode(QRCode qrCode)
+        {
+            try 
+            { 
+
+
+            GeneratedBarcode barcode = QRCodeWriter.CreateQrCode(qrCode.QRCodeText, 200);
+            barcode.AddBarcodeValueTextBelowBarcode();
+            // Styling a QR code and adding annotation text
+            barcode.SetMargins(10);
+            barcode.ChangeBarCodeColor(Color.BlueViolet);
+            string path = Path.Combine(db.WebRootPath, "GeneratedQRCode");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            string filePath = Path.Combine(db.WebRootPath, "GeneratedQRCode/qrcode");
+            barcode.SaveAsPng(filePath);
+            string fileName = Path.GetFileName(filePath);
+            string imageUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}" + "/GeneratedQRCode/" + fileName;
+            ViewBag.QrCodeUri = imageUrl;
+        }
+
+            catch (Exception)
+            {
+                throw;
+            }
+            return View();
+        }
     }
+        
+    
 }

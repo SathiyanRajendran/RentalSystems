@@ -16,6 +16,8 @@ namespace RentalSystems.Models
        public DateTime StartDate { get; set; }
        public DateTime EndDate { get; set; }
        public string IdProof { get; set; }
+        public long MobileNo { get; set; }
+        public string Email_Id { get; set; }
 
     }
 }
