@@ -13,7 +13,5 @@ namespace RentalSystems.Models
         public DbSet<Registrationtable> registrationtables { get; set; }
         public DbSet<Feedback> feedbacks { get; set; }
         public DbSet<RentalPayment> rentalPayments { get; set; }
-        public DbSet<RentalSystems.Models.QRCode> QRCode { get; set; }
-        public string WebRootPath { get; internal set; }
     }
 }

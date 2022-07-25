@@ -13,6 +13,9 @@ using Microsoft.AspNetCore.Authorization;
 using IronBarCode;
 using System.Drawing;
 using System.IO;
+using QRCoder;
+using System.Net.Mail;
+using System.Net;
 
 namespace RentalSystems.Controllers
 {
@@ -73,41 +76,82 @@ namespace RentalSystems.Controllers
         public IActionResult ContactUs()
         {
             return View();
-        }
-        public IActionResult CreateQRCode()
+        }    
+        public IActionResult SendEmail()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult CreateQRCode(QRCode qrCode)
+        public ActionResult SendEmail(string receiver, string subject, string message)
         {
-            try 
-            { 
-
-
-            GeneratedBarcode barcode = QRCodeWriter.CreateQrCode(qrCode.QRCodeText, 200);
-            barcode.AddBarcodeValueTextBelowBarcode();
-            // Styling a QR code and adding annotation text
-            barcode.SetMargins(10);
-            barcode.ChangeBarCodeColor(Color.BlueViolet);
-            string path = Path.Combine(db.WebRootPath, "GeneratedQRCode");
-            if (!Directory.Exists(path))
+            try
             {
-                Directory.CreateDirectory(path);
+                if (ModelState.IsValid)
+                {
+                    var senderEmail = new MailAddress("rentalsystem3@gmail.com", "Sathiyan");
+                    var receiverEmail = new MailAddress(receiver, "Receiver");
+                    var password = "gusmmfohuxvryrfx";
+                    var sub = subject;
+                    var body = message;
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(senderEmail.Address, password)
+                    };
+                    using (var mess = new MailMessage(senderEmail, receiverEmail)
+                    {
+                        Subject = subject,
+                        Body = body
+                    })
+                    {
+                        smtp.Send(mess);
+                    }
+                    return View();
+                }
             }
-            string filePath = Path.Combine(db.WebRootPath, "GeneratedQRCode/qrcode");
-            barcode.SaveAsPng(filePath);
-            string fileName = Path.GetFileName(filePath);
-            string imageUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}" + "/GeneratedQRCode/" + fileName;
-            ViewBag.QrCodeUri = imageUrl;
-        }
-
             catch (Exception)
             {
-                throw;
+                ViewBag.Error = "Some Error";
             }
             return View();
         }
+        public ActionResult Email()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Email(EmailModel model)
+        {
+            MailMessage mm = new MailMessage("rentalsystem3@gmail.com", model.To);
+
+            mm.Subject = model.Subject;
+            mm.Body = model.Body;
+            //if (model.Attachment.ContentLength>0)
+            //{
+            //    string fileName = Path.GetFileName(model.Attachment.FileName);
+            //    mm.Attachments.Add(new Attachment(model.Attachment.InputStream,fileName));
+            //}
+            mm.IsBodyHtml = false;
+            SmtpClient smtp = new SmtpClient();
+
+            smtp.Host = "smtp.gmail.com";
+            smtp.EnableSsl = true;
+            NetworkCredential NetworkCred = new NetworkCredential("rentalsystem3@gmail.com", "gusmmfohuxvryrfx");
+            smtp.UseDefaultCredentials = true;
+            smtp.Credentials = NetworkCred;
+            smtp.Port = 587;
+            smtp.Send(mm);
+            ViewBag.Message = "Email sent.";
+
+
+
+            return View();
+        }
+        
     }
         
     

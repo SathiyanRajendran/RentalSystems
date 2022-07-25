@@ -59,7 +59,15 @@
                 @Html.DisplayFor(modelItem => item.Model)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Availability)
+                @if(item.Stocks<1)
+                    {
+                       <h6 style="color:red">Out of stock</h6>
+                    }
+
+                 else
+                    {
+                       <h6 style="color:green">Available</h6>
+                    }
             </td>
             <td>
                <img src="~/css/@item.Photo" alt="no data" height="100" width="100"/>

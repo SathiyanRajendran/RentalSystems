@@ -18,6 +18,5 @@ namespace RentalSystems.Models
        public string IdProof { get; set; }
         public long MobileNo { get; set; }
         public string Email_Id { get; set; }
-
     }
 }
