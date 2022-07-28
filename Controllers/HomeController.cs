@@ -16,6 +16,8 @@ using System.IO;
 using QRCoder;
 using System.Net.Mail;
 using System.Net;
+using System.Drawing.Imaging;
+using BarcodeLib;
 
 namespace RentalSystems.Controllers
 {
@@ -151,8 +153,46 @@ namespace RentalSystems.Controllers
 
             return View();
         }
-        
-    }
-        
-    
+        public IActionResult QrCode()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult QrCode(string inputData)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                QRCodeGenerator qRCodeGenerator = new QRCodeGenerator();
+                QRCodeData qRCodeData = qRCodeGenerator.CreateQrCode(inputData, QRCodeGenerator.ECCLevel.Q);
+                QRCode qRCode = new QRCode(qRCodeData);
+                using (Bitmap bitmap = qRCode.GetGraphic(20))
+                {
+                    bitmap.Save(memoryStream, ImageFormat.Png);
+                    ViewBag.QRCode = "data:image/png;base64," + Convert.ToBase64String(memoryStream.ToArray());
+                }
+            }
+
+            return View();
+        }
+        public IActionResult BarCode()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult BarCode(string inputData)
+        {
+            MemoryStream memoryStream;
+            using (memoryStream = new MemoryStream())
+            {
+                Barcode barcode = new Barcode();
+                Image img = barcode.Encode(TYPE.CODE39, inputData, Color.Black, Color.White, 250, 100);
+                img.Save(memoryStream, ImageFormat.Png);
+            }
+
+            Response response = new Response(); //Model
+            response.Data = "data:image/png;base64," + Convert.ToBase64String(memoryStream.ToArray());
+
+            return View(response);
+        }
+    }   
 }

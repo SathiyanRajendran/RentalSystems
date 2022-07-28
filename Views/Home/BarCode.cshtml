@@ -1,0 +1,18 @@
+﻿@model RentalSystems.Models.Response
+ 
+@{
+    ViewData["Title"] = "Home Page";
+}
+ 
+@using (Html.BeginForm("BarCode", "Home", FormMethod.Post))
+{
+    <input type="text" name="inputData" />
+    <input type="submit" value="Generate Barcode" />
+}
+ 
+<br />
+ 
+@if (Model != null)
+{
+    <img src="@Model.Data" />
+}

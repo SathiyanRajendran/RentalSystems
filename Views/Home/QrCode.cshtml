@@ -1,0 +1,17 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using (Html.BeginForm("QrCode", "Home", FormMethod.Post))
+{
+<input type="text" name="inputData" />
+<input type="submit" value="Generate QR Code" />
+}
+ 
+<br />
+ 
+@if (ViewBag.QRCode != null)
+{
+<img src="@ViewBag.QRCode" style="width:200px; height:200px;" />
+}

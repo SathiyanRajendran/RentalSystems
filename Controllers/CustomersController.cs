@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using RentalSystems.DataLayer;
 using RentalSystems.Models;
 using System.Linq;
 
@@ -15,18 +16,28 @@ namespace RentalSystems.Controllers
         {
             db = _db;
         }
+        //private ICustomerRepo interfaceobj;
+        //public CustomersController()
+        //{
+        //    interfaceobj = new CustomerRepo(new OwnerDbContext());
 
-       public IActionResult VehicleList(string option,string search)  //owner table show to customers then they booked
+        //}
+
+
+
+
+
+        public IActionResult VehicleList()  //owner table show to customers then they booked
         {
 
-            
+
             ViewBag.UserName = HttpContext.Session.GetString("username");
 
             if (ViewBag.UserName != null)
             {
 
-            return View(db.owners.ToList());
-            //    return View(db.owners.ToListAsync());
+                return View(db.owners.ToList());
+                //    return View(db.owners.ToListAsync());
             }
             else
             {
@@ -49,21 +60,30 @@ namespace RentalSystems.Controllers
         }
         public IActionResult Booking() //List of customers
         {
-            var result = db.customers.Include(x => x.Owner).ToList();
-            return View(result);
+            var data = from m in db.customers select m;
+            return View(data);
         }
-        [HttpGet]
-        public IActionResult CustomerCreate()
+       [HttpGet]
+       public IActionResult CustomerCreate(int? VehicleId )
         {
             var result = new SelectList(from i in db.owners select i.VehicleId).ToList();
-            ViewBag.VehicleId = result;
+          
+     var o=  db.owners.FirstOrDefault(i => i.VehicleId == VehicleId); //Shows the owner table to display
+            ViewBag.Vid = o.Model;
+           ViewBag.Rpd = o.Rentalperday;
+            ViewBag.Vno = o.VehicleNo;
+            //25th july by Hariesh changes
+
+           ViewBag.VehicleId = result;
             ViewBag.Username = HttpContext.Session.GetString("username");
-            ViewBag.EmailId = HttpContext.Session.GetString("emailid");
-            return View();
-        }
+           ViewBag.EmailId = HttpContext.Session.GetString("emailid");
+           return View();
+       }
         [HttpPost]
         public IActionResult CustomerCreate(Customer s) //Stocks purchasing
         {
+
+
             db.customers.Add(s);
             Owner c = db.owners.Find(s.VehicleId);
             var bal = (from i in db.owners where i.VehicleId == s.VehicleId select i).First<Owner>().Stocks;
@@ -135,9 +155,9 @@ namespace RentalSystems.Controllers
         {
             db.feedbacks.Add(F);
             db.SaveChanges();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
-        
+
         public IActionResult RentCost()
         {
             return View(new RentalPayment());
@@ -146,20 +166,22 @@ namespace RentalSystems.Controllers
         [HttpPost]
         public IActionResult RentCost(RentalPayment R)
         {
+
             if (R.Charge >= 2000)
             {
                 R.GST = R.Charge * 10 / 100;
             }
-            else 
+            else
             {
                 R.GST = R.Charge * 5 / 100;
             }
-            
+
             R.Total = R.Charge + R.GST;
 
             return View(R);
 
         }
+
 
     }
 }

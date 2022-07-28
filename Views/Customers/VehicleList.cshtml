@@ -83,7 +83,7 @@
                 @*<a asp-action="Edit" asp-route-id="@item.VehicleId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.VehicleId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.VehicleId">Delete</a>*@
-               | <a class="btn-success" asp-action="CustomerCreate" asp-route-id="@item.VehicleId">To Book</a> |
+               | <a class="btn-success" asp-action="CustomerCreate" asp-route-VehicleId="@item.VehicleId">To Book</a> |
 
             </td>
         </tr>
