@@ -74,7 +74,7 @@ namespace RentalSystems.Controllers
             ViewBag.Vno = o.VehicleNo;
             //25th july by Hariesh changes
 
-           ViewBag.VehicleId = result;
+           ViewBag.VehicleId = result; //dropdown using viewbag
             ViewBag.Username = HttpContext.Session.GetString("username");
            ViewBag.EmailId = HttpContext.Session.GetString("emailid");
            return View();

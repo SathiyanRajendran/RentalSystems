@@ -51,51 +51,51 @@ namespace RentalSystems.Controllers
         [HttpPost]
         public IActionResult Register(Registrationtable obj)
         {
-        //    db.registrationtables.Add(obj);
-        //    db.SaveChanges();
+            //db.registrationtables.Add(obj);
+            //db.SaveChanges();
 
-        //    // Send Mail Confirmation for passsword
+            // Send Mail Confirmation for passsword
 
-        //    var senderEmail = new MailAddress("rentalsystem3@gmail.com", "Sathiyan");
-        //    var receiverEmail = new MailAddress(obj.MailId, "Receiver");
-        //    var password = "gusmmfohuxvryrfx";
-        //    var sub = "Hello " + obj.UserName + "! Welcome to Cape Town Rental System";
-        //    var body = "Your User Id: " + obj.UserId + " And your password is :" + obj.Password;
-        //    var smtp = new SmtpClient
-        //    {
+            //var senderEmail = new MailAddress("rentalsystem3@gmail.com", "Sathiyan");
+            //var receiverEmail = new MailAddress(obj.EmailId, "Receiver");
+            //var password = "gusmmfohuxvryrfx";
+            //var sub = "Hello " + obj.UserName + "! Welcome to Cape Town Rental System";
+            //var body = "Your User Id: " + obj.UserId + " And your password is :" + obj.Password;
+            //var smtp = new SmtpClient
+            //{
 
-        //        Host = "smtp.gmail.com",
-        //        Port = 587,
-        //        EnableSsl = true,
-        //        DeliveryMethod = SmtpDeliveryMethod.Network,
-        //        UseDefaultCredentials = false,
-        //        Credentials = new NetworkCredential(senderEmail.Address, password)
-        //    };
-        //    using (var mess = new MailMessage(senderEmail, receiverEmail)
-        //    {
-        //        Subject = sub,
-        //        Body = body
-        //    })
-        //    {
-        //        smtp.Send(mess);
-        //        ViewBag.Message = String.Format("Registered Successfully!!\\ Please Check Your Mail to login.");
-        //    }
-        //    return View("Login");
-        //}
+            //    Host = "smtp.gmail.com",
+            //    Port = 587,
+            //    EnableSsl = true,
+            //    DeliveryMethod = SmtpDeliveryMethod.Network,
+            //    UseDefaultCredentials = false,
+            //    Credentials = new NetworkCredential(senderEmail.Address, password)
+            //};
+            //using (var mess = new MailMessage(senderEmail, receiverEmail)
+            //{
+            //    Subject = sub,
+            //    Body = body
+            //})
+            //{
+            //    smtp.Send(mess);
+            //    ViewBag.Message = String.Format("Registered Successfully!!\\ Please Check Your Mail to login.");
+            //}
+            //return View("Login");
+        
         ViewBag.UserId = obj.UserId;
-        if (obj.UserId != null)
-        {
-            db.registrationtables.Add(obj);
-            db.SaveChanges();
-            HttpContext.Session.SetInt32("userid", obj.UserId);
-            return View();
-    }
-        else
-        {
-            return View();
-}
+            if (obj.UserId != null)
+            {
+                db.registrationtables.Add(obj);
+                db.SaveChanges();
+                HttpContext.Session.SetInt32("userid", obj.UserId);
+                return View();
+            }
+            else
+            {
+                return View();
+            }
 
-    }
+        }
         public IActionResult AdminLogin()
         {
             return View();
